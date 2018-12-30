@@ -1,0 +1,192 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# release-rdb-api
+
+以下の目的をもとにAPIを定義する。
+* 渡された各データ（ユーザー、投稿など）を保存する。  
+* 指定された条件をもとに検索を行い、結果を返却する。  
+* 指示を受けた時に同期処理を行う。
+
+## ユーザー情報 [/users]
+
+### ユーザー情報保存 [POST]
+
+* 受け取ったデータは該当ユーザーの全情報とする。  
+* idをもとにユーザーを特定する。  
+* 特定できる場合は既存データに上書きしていく、特定できない場合新規に追加する。  
+* idが必須です。
+* status： 1：追加、0：削除
+
++ Request (application/json)
+
+    + Body
+    
+            {
+                  "id" : "LpxA7TwMVUZNCU3Y4QQNEc3UYfE2",
+                  "displayName" : "Futagoishi Rika",
+                  "avatarUrl" : "https://graph.facebook.com/1884781128242421/picture",
+                  "email" : "ww@smaken.jp",
+                  "description" : "",
+                  "gender" : 2,
+                  "language" : "jp",
+                  "birthday" : "2018-01-01 15:27:27",
+                  "address" : "",
+                  "webUrl" : "",
+                  "blogUrl" : "",
+                  "pushNotificationAvailable" : false,
+                  "mailNotificationAvailable" : false,
+                  "commentAvailable" : false,
+                  "socialAccounts" : {},
+                  "status": 1
+            }
+       
+       
++ Response 201(application/json)
+
+    + Body
+
+            {
+                  "message" : "保存しました。"
+            }
+
+
+## フォロー情報 [/users/follow]
+### FOLLOW情報保存 [POST]
+
+* フォローアの追加・削除を行う。  
+* status： 1：追加、0：削除
+
++ Request (application/json)
+
+    + Body
+    
+            {
+                  "userId" : "fwkZBfHz65J9G5swBbs4",
+                  "targetUserId" : "iZPgQ9YwN0c1EMvQtv9Q",
+                  "status" : 0
+            }
+       
+       
++ Response 201(application/json)
+
+    + Body
+
+            {
+                  "message" : "保存しました。"
+            }
+
+## Feeds情報 [/feeds]
+### feed情報保存 [POST]
+
+* feedsの追加、更新、削除を行う。
+* status： 1：追加・更新、0：削除
+
++ Request (application/json)
+
+    + Body
+    
+            {
+                  "id" : "5oAqpALPy44beONlUksv",
+                  "userId" : "RiiZPgQ9YwN0c1EMvQtv9QTi3Th1",
+                  "text" : "あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。\n　またそのなかでいっしょになったたくさんのひとたち、ファゼーロとロザーロ、羊飼のミーロや、顔の赤いこどもたち、地主のテーモ、山猫博士のボーガント・デストゥパーゴなど、いまこの暗い巨きな石の建物のなかで考えていると、みんなむかし風のなつかしい青い幻燈のように思われます。では、わたくしはいつかの小さなみだしをつけながら、しずかにあの年のイーハトーヴォの五月から十月までを書きつけましょう。",
+                  "createdAt" : "2018-01-01 15:27:27",
+                  "updatedAt" : "2018-01-01 15:27:27",
+                  "photos" : [
+                    "fwkZBfHz65J9G5swBbs4"
+                  ],
+                  "movies" : [
+                    "fwkZBfHz65J9G5swBbs4"
+                  ],
+                  "status": "0"
+            }
+       
+       
++ Response 201(application/json)
+
+    + Body
+
+            {
+                  "message" : "保存しました。"
+            }
+
+## Photos情報 [/photos]
+### photo情報保存 [POST]
+
+* photosの追加、更新、削除を行う。
+* status： 1：追加・更新、0：削除
+
++ Request (application/json)
+
+    + Body
+    
+            {
+                  "id" : "fwkZBfHz65J9G5swBbs4",
+                  "origin" : "https://firebasestorage.googleapis.com/v0/b/release-stg.appspot.com/o/feeds%2FRiiZPgQ9YwN0c1EMvQtv9QTi3Th1%2F1c4040e3-369f-46a5-ac0f-7fd3d1062b72?alt=media&token=79a376f5-0583-4202-ab0c-83015f39649f",
+                  "s" : "https://firebasestorage.googleapis.com/v0/b/release-stg.appspot.com/o/feeds%2FRiiZPgQ9YwN0c1EMvQtv9QTi3Th1%2F1c4040e3-369f-46a5-ac0f-7fd3d1062b72?alt=media&token=79a376f5-0583-4202-ab0c-83015f39649f",
+                  "m" : "https://firebasestorage.googleapis.com/v0/b/release-stg.appspot.com/o/feeds%2FRiiZPgQ9YwN0c1EMvQtv9QTi3Th1%2F1c4040e3-369f-46a5-ac0f-7fd3d1062b72?alt=media&token=79a376f5-0583-4202-ab0c-83015f39649f",
+                  "l" : "https://firebasestorage.googleapis.com/v0/b/release-stg.appspot.com/o/feeds%2FRiiZPgQ9YwN0c1EMvQtv9QTi3Th1%2F1c4040e3-369f-46a5-ac0f-7fd3d1062b72?alt=media&token=79a376f5-0583-4202-ab0c-83015f39649f",
+                  "status": "0"
+            }
+       
+       
++ Response 201(application/json)
+
+    + Body
+
+            {
+                  "message" : "保存しました。"
+            }
+
+## タイムライン情報 [/timeline]
+### タイムライン情報取得 [POST]
+
+* 指定されたユーザーにかかわるFeed情報を抽出してFirebase側に書き込む。
+
++ Request (application/json)
+
+    + Body
+    
+            {
+                  "id" : "5oAqpALPy44beONlUksv",
+                  "userId" : "RiiZPgQ9YwN0c1EMvQtv9QTi3Th1",
+                  "text" : "あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。\n　またそのなかでいっしょになったたくさんのひとたち、ファゼーロとロザーロ、羊飼のミーロや、顔の赤いこどもたち、地主のテーモ、山猫博士のボーガント・デストゥパーゴなど、いまこの暗い巨きな石の建物のなかで考えていると、みんなむかし風のなつかしい青い幻燈のように思われます。では、わたくしはいつかの小さなみだしをつけながら、しずかにあの年のイーハトーヴォの五月から十月までを書きつけましょう。",
+                  "createdAt" : "2018-01-01 15:27:27",
+                  "updatedAt" : "2018-01-01 15:27:27",
+                  "photos" : [
+                      "origin" : "https://firebasestorage.googleapis.com/v0/b/release-stg.appspot.com/o/feeds%2FRiiZPgQ9YwN0c1EMvQtv9QTi3Th1%2F1c4040e3-369f-46a5-ac0f-7fd3d1062b72?alt=media&token=79a376f5-0583-4202-ab0c-83015f39649f",
+                      "s" : "https://firebasestorage.googleapis.com/v0/b/release-stg.appspot.com/o/feeds%2FRiiZPgQ9YwN0c1EMvQtv9QTi3Th1%2F1c4040e3-369f-46a5-ac0f-7fd3d1062b72?alt=media&token=79a376f5-0583-4202-ab0c-83015f39649f",
+                      "m" : "https://firebasestorage.googleapis.com/v0/b/release-stg.appspot.com/o/feeds%2FRiiZPgQ9YwN0c1EMvQtv9QTi3Th1%2F1c4040e3-369f-46a5-ac0f-7fd3d1062b72?alt=media&token=79a376f5-0583-4202-ab0c-83015f39649f",
+                      "l" : "https://firebasestorage.googleapis.com/v0/b/release-stg.appspot.com/o/feeds%2FRiiZPgQ9YwN0c1EMvQtv9QTi3Th1%2F1c4040e3-369f-46a5-ac0f-7fd3d1062b72?alt=media&token=79a376f5-0583-4202-ab0c-83015f39649f"
+                  ],
+                  "movies" : [
+                    "fwkZBfHz65J9G5swBbs4"
+                  ],
+                  "status": "0"
+            },
+            {
+                  "id" : "5oAqpALPy44beONlUksw",
+                  "userId" : "RiiZPgQ9YwN0c1EMvQtv9QTi3Th1",
+                  "text" : "あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。\n　またそのなかでいっしょになったたくさんのひとたち、ファゼーロとロザーロ、羊飼のミーロや、顔の赤いこどもたち、地主のテーモ、山猫博士のボーガント・デストゥパーゴなど、いまこの暗い巨きな石の建物のなかで考えていると、みんなむかし風のなつかしい青い幻燈のように思われます。では、わたくしはいつかの小さなみだしをつけながら、しずかにあの年のイーハトーヴォの五月から十月までを書きつけましょう。",
+                  "createdAt" : "2018-01-01 15:27:27",
+                  "updatedAt" : "2018-01-01 15:27:27",
+                  "photos" : [
+                      "origin" : "https://firebasestorage.googleapis.com/v0/b/release-stg.appspot.com/o/feeds%2FRiiZPgQ9YwN0c1EMvQtv9QTi3Th1%2F1c4040e3-369f-46a5-ac0f-7fd3d1062b72?alt=media&token=79a376f5-0583-4202-ab0c-83015f39649f",
+                      "s" : "https://firebasestorage.googleapis.com/v0/b/release-stg.appspot.com/o/feeds%2FRiiZPgQ9YwN0c1EMvQtv9QTi3Th1%2F1c4040e3-369f-46a5-ac0f-7fd3d1062b72?alt=media&token=79a376f5-0583-4202-ab0c-83015f39649f",
+                      "m" : "https://firebasestorage.googleapis.com/v0/b/release-stg.appspot.com/o/feeds%2FRiiZPgQ9YwN0c1EMvQtv9QTi3Th1%2F1c4040e3-369f-46a5-ac0f-7fd3d1062b72?alt=media&token=79a376f5-0583-4202-ab0c-83015f39649f",
+                      "l" : "https://firebasestorage.googleapis.com/v0/b/release-stg.appspot.com/o/feeds%2FRiiZPgQ9YwN0c1EMvQtv9QTi3Th1%2F1c4040e3-369f-46a5-ac0f-7fd3d1062b72?alt=media&token=79a376f5-0583-4202-ab0c-83015f39649f"
+                  ],
+                  "movies" : [
+                    "fwkZBfHz65J9G5swBbs4"
+                  ],
+                  "status": "0"
+            }
+       
+       
++ Response 201(application/json)
+
+    + Body
+
+            {
+                  "message" : "書き込みました。"
+            }
